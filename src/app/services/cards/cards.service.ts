@@ -5,16 +5,16 @@ import { Injectable } from '@angular/core';
 })
 export class CardsService {
 
-  cardsToCompare: number[] = [];
+  cards: any[] = [];
   constructor() { }
 
-  compareCards(card: number) {
-    // let count = this.cardsToCompare.length;
-    // if (count < 2) {
-    //   this.cardsToCompare.push(card)
-    // } else if (count == 2) {
+  compareCards(card: any) {
+    console.log(card);
+    if(this.cards.length < 2){
+      this.cards.push(card);
+    }
 
-    // }
+    console.log(this.cards);
   }
 
 }

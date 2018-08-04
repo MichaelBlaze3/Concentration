@@ -32,7 +32,6 @@ export class GametableComponent implements OnInit {
           if (this.deck.error) {
             this._router.navigate(['new']);
           }
-          this.createPiles();
         },
         err => {
           console.log(err);
@@ -41,11 +40,6 @@ export class GametableComponent implements OnInit {
     } else {
       this._router.navigate(['new']);
     }
-  }
-
-  createPiles() {
-    console.log("[Setting Deck Into Piles]");
-    // console.log(this.deck.cards);
   }
   
 }

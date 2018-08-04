@@ -5,7 +5,9 @@ div.gametable {
     margin: 0 auto;
     div.card-container {
         width: 110px;
+        min-height: 151px;
         display: block;
         float: left;
+        margin-top: 5px;
     }
 }

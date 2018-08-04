@@ -10,14 +10,21 @@ import { CardsService } from '../../../services/cards/cards.service';
 export class CardComponent implements OnInit {
   @Input() card;
 
+  defaultPath:string = "";
+  back:string = "../../../../assets/playing-cards-front/playing-card-back.png";
+
   constructor(
     private _cardsService: CardsService
-  ) { }
+  ) { 
+    this.defaultPath = this.back
+  }
 
   ngOnInit() { }
 
   _toggle() {
-    console.log(this.card);
+    console.log('[Toggle Method]');
+    this.defaultPath = this.card.image;
+    this._cardsService.compareCards(this.card);
   }
 
 }
