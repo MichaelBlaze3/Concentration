@@ -17,14 +17,14 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {
   }
 
-  _newGame(): void {
-    this._deckService.newShuffledDeck().subscribe(res => {
-      console.log(res);
-      this.temp = res;
-      this._deckService.setDeck(this.temp);
-    }, err => {
-      console.log(err);
-    });
-  }
+  // _newGame(): void {
+  //   this._deckService.newShuffledDeck().subscribe(res => {
+  //     console.log(res);
+  //     this.temp = res;
+  //     this._deckService.setDeck(this.temp);
+  //   }, err => {
+  //     console.log(err);
+  //   });
+  // }
 
 }

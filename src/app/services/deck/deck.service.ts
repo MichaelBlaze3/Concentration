@@ -14,6 +14,24 @@ export class DeckService {
     private _http: HttpClient
   ) { }
 
+
+  /**
+   * @method newDeck
+   * @description Creates a brand new deck
+   */
+  newDeck() {
+    return this._http.get(this._config.url + "/new/");
+  }
+
+  /**
+   * @method shuffleDeck
+   * @description Shuffles a spacific deck
+   * @param {String} deckID 
+   */
+  shuffleDeck(deckID: string) {
+    return this._http.get(this._config.url + deckID + "/shuffle/");
+  }
+
   /**
    * @method newShuffledDeck
    * @description Makes request to API for a brand new shuffled deck
@@ -37,9 +55,8 @@ export class DeckService {
    * @description Stores the DECK information in localStorage for future access
    * @param {DECK} deck 
    */
-  setDeck(deck: DECK) {
+  setDeckID(deck: DECK) {
     localStorage.setItem('deck_id', deck.deck_id);
-    localStorage.setItem('remaining', deck.remaining.toString());
   }
 
   /**
@@ -50,9 +67,9 @@ export class DeckService {
     let id = localStorage.getItem("deck_id");
     if (id != null || id != undefined) {
       return id;
+    } else {
+      return null;
     }
   }
-
-
 
 }

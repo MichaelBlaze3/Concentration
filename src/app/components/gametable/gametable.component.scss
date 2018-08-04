@@ -1,8 +1,11 @@
 div.gametable {
-    width: 90%;
-    height: 700px;
+    margin: 5px;
+    width: 1430px;
     display: block;
     margin: 0 auto;
-    // border: 2px solid black;
-    // border-radius: 10px;
+    div.card-container {
+        width: 110px;
+        display: block;
+        float: left;
+    }
 }

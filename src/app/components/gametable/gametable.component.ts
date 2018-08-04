@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DeckService } from '../../services/deck/deck.service';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-gametable',
   templateUrl: './gametable.component.html',
@@ -7,39 +9,43 @@ import { DeckService } from '../../services/deck/deck.service';
 })
 export class GametableComponent implements OnInit {
 
-  deck:any = []
-  cards:any = []
-  deckID:string;
-
+  // Local properties
+  deck: any;
+  deckID: string;
   constructor(
-    private _deck: DeckService
+    private _deck: DeckService,
+    private _router: Router
   ) { }
 
   ngOnInit() {
-    this.getDeckID();
-  }
-
-  getDeckID(){
     this.deckID = this._deck.getDeckID();
-    console.log(this.deckID);
-    // if(this.deckID != null || this.deckID != undefined){
-    //   for(let i =0; i < 3; i++){
-    //     this.setNewTable(this.deckID);
-    //   }
-    // }
+    this.getDeck();
   }
 
-  setNewTable(ID:string){
-    this._deck.drawCards(ID, 13).subscribe(
-      res => {
-        console.log(res);
-        this.cards = res;
-        this.deck.push(this.cards.cards);
-      },
-      err => {
-        console.log(err);
-      }
-    );
+  getDeck() {
+    console.log("[Getting Deck]");
+    if (this.deckID != null || this.deckID != undefined) {
+      this._deck.drawCards(this.deckID, 52).subscribe(
+        res => {
+          this.deck = res;
+          console.log(this.deck);
+          if (this.deck.error) {
+            this._router.navigate(['new']);
+          }
+          this.createPiles();
+        },
+        err => {
+          console.log(err);
+        }
+      );
+    } else {
+      this._router.navigate(['new']);
+    }
   }
 
+  createPiles() {
+    console.log("[Setting Deck Into Piles]");
+    // console.log(this.deck.cards);
+  }
+  
 }
