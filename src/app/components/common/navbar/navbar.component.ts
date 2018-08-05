@@ -1,30 +1,41 @@
-import { Component, OnInit } from '@angular/core';
-import { DeckService } from '../../../services/deck/deck.service';
-import { DECK } from '../../../constants/deck.interface';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent implements OnInit, OnDestroy {
 
-  temp: any;
-
+  event:any;
+  activeURL:string;
+  mySubscription: Subscription
   constructor(
-    private _deckService: DeckService
-  ) { }
-
-  ngOnInit() {
+    private _router: Router
+  ) {
+    this.mySubscription = this._router.events.subscribe(event => {
+      if(event instanceof NavigationEnd){
+        this.getActiveURL();       
+      }
+    });
   }
 
-  // _newGame(): void {
-  //   this._deckService.newShuffledDeck().subscribe(res => {
-  //     console.log(res);
-  //     this.temp = res;
-  //     this._deckService.setDeck(this.temp);
-  //   }, err => {
-  //     console.log(err);
-  //   });
-  // }
+  ngOnInit() {}
+  
+  getActiveURL(){
+    // this._activatedRoute.url.subscribe(url => {
+    //   console.log(url);
+    // });
+    console.log(this._router.url);
+    this.activeURL = this._router.url;
+  }
+  _newGame(){
+    this._router.navigate(['new']);
+  }
+
+  ngOnDestroy(){
+    this.mySubscription.unsubscribe();
+  }
 
 }

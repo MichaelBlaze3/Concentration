@@ -5,7 +5,7 @@
         <a class="navbar-brand" href="#">Concentrait</a>
       </div>
       <div class="col-8">
-        <button class="btn btn-outline-success" type="button" (click)="_newGame()">End Game</button>
+        <button class="btn btn-outline-success" type="button" (click)="_newGame()" *ngIf="activeURL == '/table'">End Game</button>
       </div>
     </div>
   </div>

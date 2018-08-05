@@ -20,7 +20,7 @@ export class CardComponent implements OnInit, OnDestroy {
     this.defaultPath = this.back;
     this.mySubscription = this._cardsService.currentMessageForNoMatch.subscribe(res => {
       console.log(res);
-      this.defaultPath = this.back
+      this.defaultPath = this.back;
     })
   }
 

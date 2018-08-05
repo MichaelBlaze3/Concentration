@@ -1,5 +1,4 @@
 div.gametable {
-    margin: 5px;
     width: 1430px;
     display: block;
     margin: 0 auto;
@@ -10,4 +9,11 @@ div.gametable {
         float: left;
         margin-top: 5px;
     }
+}
+div.cover {
+    position: absolute;
+    top: 56px;
+    left: 0;
+    width: 100%;
+    height: calc(100% - 56px);
 }

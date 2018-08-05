@@ -15,17 +15,25 @@ export class GametableComponent implements OnInit, OnDestroy {
   deck: any;
   deckID: string;
   mySubscription: Subscription;
+  myTriggerSubscription: Subscription;
+  coverStatus: boolean = false;
+
   constructor(
     private _deck: DeckService,
     private _router: Router,
     private _cardsService: CardsService
-  ) { 
+  ) {
     this.mySubscription = this._cardsService.currentMessageForMatch.subscribe(message => {
-      console.log('[From gametable]');
-      console.log("Matched Cards: " + message);
-      // console.log(this.deck.cards);
       this.removedMatchedCards(message);
-    })
+    });
+
+    this.myTriggerSubscription = this._cardsService.currentTriggerStatus.subscribe(status => {
+      this.coverStatus = status;
+      setTimeout(() => {
+        this.coverStatus = false;
+      }, 2500);
+    });
+
   }
 
   ngOnInit() {
@@ -34,7 +42,6 @@ export class GametableComponent implements OnInit, OnDestroy {
   }
 
   getDeck() {
-    console.log("[Getting Deck]");
     if (this.deckID != null || this.deckID != undefined) {
       this._deck.drawCards(this.deckID, 52).subscribe(
         res => {
@@ -53,23 +60,20 @@ export class GametableComponent implements OnInit, OnDestroy {
     }
   }
 
-  removedMatchedCards(cards){
-    console.log(cards);
-    console.log(this.deck);
-    for(let i = 0; i < cards.length; i++){
-      for(let j = 0; j < this.deck.length; j++){
-        if(cards[i].code === this.deck[j].code){
+  removedMatchedCards(cards) {
+    for (let i = 0; i < cards.length; i++) {
+      for (let j = 0; j < this.deck.length; j++) {
+        if (cards[i].code === this.deck[j].code) {
           console.log(`[Matched found and removing at position ${j}]`);
-          this.deck.splice(j,1);
+          this.deck.splice(j, 1);
           console.log(this.deck);
         }
       }
     }
   }
 
-
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.mySubscription.unsubscribe();
   }
-  
+
 }
