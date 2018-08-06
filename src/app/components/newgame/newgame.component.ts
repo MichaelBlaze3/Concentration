@@ -28,6 +28,10 @@ export class NewgameComponent implements OnInit {
   ngOnInit() {
   }
 
+  /**
+   * @method _newDeck
+   * @description Request a new deck by calling the _deckService triggered by a click event
+   */
   _newDeck() {
     console.log('[Create New Deck]');
     this._deckService.newDeck().subscribe(
@@ -43,6 +47,10 @@ export class NewgameComponent implements OnInit {
     );
   }
 
+  /**
+   * @method shuffleNewDeck
+   * @description We get the current deck and make a request to _deckService to shuffle the deck for us.
+   */
   shuffleNewDeck() {
     console.log('[Shuffling New Deck]');
     let id = this._deckService.getDeckID();
@@ -58,6 +66,4 @@ export class NewgameComponent implements OnInit {
       );
     }
   }
-
-
 }

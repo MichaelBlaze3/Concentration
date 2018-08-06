@@ -23,13 +23,19 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   ngOnInit() {}
   
+  /**
+   * @method getActiveURL
+   * @description Obtains the currect active url
+   */
   getActiveURL(){
-    // this._activatedRoute.url.subscribe(url => {
-    //   console.log(url);
-    // });
     console.log(this._router.url);
     this.activeURL = this._router.url;
   }
+  
+  /**
+   * @method _newGame
+   * @description Navigates to a new route triggered by click event
+   */
   _newGame(){
     this._router.navigate(['new']);
   }

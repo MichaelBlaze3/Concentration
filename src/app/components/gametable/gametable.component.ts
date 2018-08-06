@@ -18,15 +18,15 @@ export class GametableComponent implements OnInit, OnDestroy {
    */
 
   // Local properties
-  deck: any = [];
-  deckID: string;
-  deckResponse: any;
-  coverStatus: boolean = false;
-  didGameEnd: boolean = false;
-  comparationArray: any = [];
+  deck: any = [];  // Contains all the cards obtained by the deck api
+  deckID: string; // Contains the id of the current deck 
+  deckResponse: any; // Temporary stores the response from the service
+  coverStatus: boolean = false; // Contains the status of the div element status
+  didGameEnd: boolean = false; // Let us know if the game finished
+  comparationArray: any = []; // Stores the 2 cards that we want to compare
 
   // Card Image variables
-  path: string = '';
+  path: string = ''; 
   back: string = "../../../../assets/playing-cards-front/playing-card-back.png";
 
   constructor(
@@ -58,7 +58,6 @@ export class GametableComponent implements OnInit, OnDestroy {
    * @description Makes a call to _deckService to obtain the cards object
    */
   getDeck() {
-
     if (this.deckID != null || this.deckID != undefined) {
       this._deckService.drawCards(this.deckID, 52).subscribe(
         res => {
@@ -78,10 +77,15 @@ export class GametableComponent implements OnInit, OnDestroy {
     }
   }
 
+  /**
+   * @method _toggle
+   * @description Called by click event providing the card that player wants to compare
+   * @param card 
+   */
   _toggle(card: any) {
-    card.active = true;
     // comparation array only accepts two element, no repeated elements allowed.
     if (this.comparationArray.length < 2) {
+      card.active = true;
       let isCardAlreadyAdded = false;
       for (let i = 0; i < this.comparationArray.length; i++) {
         if (card.code === this.comparationArray[i].code) {
@@ -90,11 +94,12 @@ export class GametableComponent implements OnInit, OnDestroy {
       }
       if (!isCardAlreadyAdded) {
         this.comparationArray.push(card);
+        console.log(this.comparationArray);
       }
     }
 
     if (this.comparationArray.length == 2) {
-      this.coverStatus = true;
+      // this.coverStatus = true;
       let result = this._cardsService.compareCards(this.comparationArray);
       console.log('Are these two cards the same? ' + result);
       if (result) {
@@ -113,7 +118,8 @@ export class GametableComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * 
+   * @method removeMatchItems
+   * @description Removes the cards that do match
    */
   removeMatchItems() {
     for (let cardToBeRemove = 0; cardToBeRemove < this.comparationArray.length; cardToBeRemove++) {
@@ -138,12 +144,14 @@ export class GametableComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Reset Section
+   * @method resetToDefaultCardImage
+   * @description Reset Section
    */
   resetToDefaultCardImage() {
     this.coverStatus = false;
-    this.comparationArray[0].active = false;
-    this.comparationArray[1].active = false;
+    for(let i=0; i< this.comparationArray.length; i++){
+      this.comparationArray[i].active = false;
+    }
     this.comparationArray = [];
   }
 
