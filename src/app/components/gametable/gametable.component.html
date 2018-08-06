@@ -1,7 +1,13 @@
 <div class="gametable">
   <div class="card-container" *ngFor="let card of deck">
-    <app-card [card]="card"></app-card>
+    <img class="card" [src]="card.image" *ngIf="card.active" alt="">
+    <img class="card" [src]="path" alt="" *ngIf="!card.active" (click)="_toggle(card)">
   </div>
 </div>
 
-<div class="cover" [hidden]="!coverStatus"></div>
+<div class="cover" [hidden]="!coverStatus">
+  <div class="winningMessage" [hidden]="!didGameEnd">
+    <h1>You have Won</h1>
+    <span>Click on End Game to Reset the deck</span>
+  </div>
+</div>

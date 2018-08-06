@@ -8,12 +8,11 @@ import { Configuration } from './constants/configuration/configuration';
 
 // Services
 import { DeckService } from './services/deck/deck.service';
-
+import { CardsService } from './services/cards/cards.service';
 // Components
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/common/navbar/navbar.component';
 import { GametableComponent } from './components/gametable/gametable.component';
-import { CardComponent } from './components/common/card/card.component';
 import { NewgameComponent } from './components/newgame/newgame.component';
 
 
@@ -22,7 +21,6 @@ import { NewgameComponent } from './components/newgame/newgame.component';
     AppComponent,
     NavbarComponent,
     GametableComponent,
-    CardComponent,
     NewgameComponent
   ],
   imports: [
@@ -30,7 +28,7 @@ import { NewgameComponent } from './components/newgame/newgame.component';
     HttpClientModule,
     RoutingModule
   ],
-  providers: [Configuration, DeckService],
+  providers: [Configuration, DeckService, CardsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -60,6 +60,15 @@ export class DeckService {
   }
 
   /**
+   * @method removeDeckID
+   * @description Removes deck_id property from storage
+   */
+  removeDeckID(){
+    console.log('Removing deck_id');
+    localStorage.removeItem('deck_id');
+  }
+
+  /**
    * @method getDeckID
    * @description Returns the current deck ID 
    */

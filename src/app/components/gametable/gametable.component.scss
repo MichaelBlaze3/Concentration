@@ -8,6 +8,11 @@ div.gametable {
         display: block;
         float: left;
         margin-top: 5px;
+        img.card {
+            width: 100%;
+            padding: 3px;
+            background-color: transparent;
+        } 
     }
 }
 div.cover {
@@ -16,4 +21,13 @@ div.cover {
     left: 0;
     width: 100%;
     height: calc(100% - 56px);
+    div.winningMessage {
+        height: 150px;
+        width: 300px;
+        display: block;
+        margin: 40px auto;
+        padding-top: 40px;
+        text-align: center;
+        color: white;
+    }
 }
